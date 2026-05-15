@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финансовый гид — займы и карты онлайн</title>
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:Inter,system-ui,Arial;
+            color:#fff;
+            min-height:100vh;
+            background: radial-gradient(circle at 20% 20%, #1a2a6c, transparent 40%),
+                        radial-gradient(circle at 80% 0%, #b21f1f, transparent 40%),
+                        radial-gradient(circle at 0% 80%, #fdbb2d, transparent 40%),
+                        #0b1020;
+        }
+
+        .container{max-width:1280px;margin:0 auto;padding:20px}
+
+        .header{
+            text-align:center;
+            padding:60px 25px;
+            border-radius:30px;
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.12);
+            backdrop-filter:blur(14px);
+        }
+
+        h1{
+            font-size:2.6rem;
+            background:linear-gradient(90deg,#ffb347,#ffcc33,#ff5f6d);
+            -webkit-background-clip:text;
+            color:transparent;
+        }
+
+        .filters{display:flex;justify-content:center;gap:10px;margin:30px 0;flex-wrap:wrap}
+        .filter-btn{padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:#fff;cursor:pointer}
+        .filter-btn.active{background:linear-gradient(90deg,#ffb347,#ff5f6d);color:#111;font-weight:700}
+
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+
+        .card{background:rgba(17,24,39,0.75);border-radius:22px;padding:18px;border:1px solid rgba(255,255,255,0.08)}
+
+        .badge{color:#ffcc33;font-size:12px}
+        .title{font-size:1.3rem;font-weight:800;margin:6px 0}
+
+        .row{display:flex;justify-content:space-between;font-size:13px;margin:6px 0;color:#cbd5e1}
+        .value{color:#ffcc33;font-weight:700}
+
+        ul{margin-top:10px;padding-left:16px;font-size:13px;color:#94a3b8}
+
+        .btn{display:block;margin-top:14px;padding:12px;text-align:center;border-radius:14px;background:linear-gradient(90deg,#ffb347,#ff5f6d);color:#111;text-decoration:none;font-weight:800}
+
+        /* TRUST */
+        .trust{margin-top:40px;padding:20px;border-radius:20px;background:rgba(255,255,255,0.05)}
+        .trust-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+        .trust-item{background:rgba(0,0,0,0.25);padding:10px;border-radius:12px;font-size:12px}
+
+        /* COMPANY */
+        .company{
+            margin-top:40px;
+            padding:20px;
+            border-radius:20px;
+            background:rgba(255,255,255,0.05);
+        }
+
+        .company-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+            gap:12px;
+            margin-top:10px;
+        }
+
+        .company-item{
+            background:rgba(0,0,0,0.25);
+            padding:12px;
+            border-radius:12px;
+            font-size:12px;
+            color:#cbd5e1;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+    <h1>💰 Финансовый гид</h1>
+</div>
+
+<div class="filters">
+    <button class="filter-btn active" onclick="setFilter('all',this)">Все</button>
+    <button class="filter-btn" onclick="setFilter('loan',this)">Займы</button>
+    <button class="filter-btn" onclick="setFilter('debit',this)">Дебетовые</button>
+    <button class="filter-btn" onclick="setFilter('credit',this)">Кредитные</button>
+</div>
+
+<div id="grid" class="grid"></div>
+
+<div class="trust">
+    <h3>🛡 Карточки доверия</h3>
+    <div class="trust-grid" id="trust"></div>
+</div>
+
+<div class="company">
+    <h3>📋 Информация о компаниях</h3>
+    <div class="company-grid" id="company"></div>
+</div>
+
+</div>
+
+<script>
+
+const data=[
+{name:"Займер",type:"loan",label:"МФО",amount:"до 30 000 ₽",term:"до 30 дней",rate:"0–0.8%",age:"18+",features:["4 мин","Онлайн"],url:"#"},
+{name:"Быстроденьги",type:"loan",label:"МФО",amount:"до 30 000 ₽",term:"30 дней",rate:"0.8%",age:"18+",features:["15 мин","Карта"],url:"#"},
+{name:"Срочноденьги",type:"loan",label:"МФО",amount:"до 30 000 ₽",term:"30 дней",rate:"0–0.8%",age:"18+",features:["24/7","Без справок"],url:"#"},
+{name:"А-Деньги",type:"loan",label:"МФО",amount:"до 30 000 ₽",term:"30 дней",rate:"0.8%",age:"18+",features:["Быстро","Онлайн"],url:"#"},
+{name:"Привет, сосед",type:"loan",label:"МФО",amount:"до 30 000 ₽",term:"30 дней",rate:"0–0.8%",age:"18+",features:["Паспорт","Круглосуточно"],url:"#"},
+{name:"BelkaCredit",type:"loan",label:"МФО",amount:"до 30 000 ₽",term:"30 дней",rate:"0.8%",age:"18+",features:["Лояльно","Онлайн"],url:"#"},
+{name:"Boostra",type:"loan",label:"МФО",amount:"до 30 000 ₽",term:"30 дней",rate:"0.8%",age:"18+",features:["Быстро","Одобрение"],url:"#"},
+
+{name:"Альфа-Банк",type:"debit",label:"Дебетовая",amount:"—",term:"—",rate:"до 20%",age:"14+",features:["Кэшбэк","Курьер"],url:"#"},
+{name:"Т-Банк",type:"debit",label:"Дебетовая",amount:"—",term:"—",rate:"до 7%",age:"14+",features:["Кэшбэк","Бесплатно"],url:"#"},
+{name:"Платёжный стикер ВТБ",type:"debit",label:"Стикер",amount:"—",term:"—",rate:"до 4.5%",age:"14+",features:["Телефон","Оплата"],url:"#"},
+
+{name:"Альфа-Банк",type:"credit",label:"Кредитная",amount:"до 1 000 000 ₽",term:"100 дней",rate:"0%",age:"18+",features:["100 дней","Доставка"],url:"#"},
+{name:"ВТБ",type:"credit",label:"Кредитная",amount:"до 1 000 000 ₽",term:"110 дней",rate:"0%",age:"18+",features:["110 дней","Снятие"],url:"#"},
+{name:"Т-Банк",type:"credit",label:"Кредитная",amount:"до 300 000 ₽",term:"55 дней",rate:"0%",age:"18+",features:["Кэшбэк","5 мин"],url:"#"}
+];
+
+const trust=["✔ ЦБ РФ","✔ Проверенные","✔ Без скрытых комиссий","✔ 24/7 поддержка"];
+
+const companies=[
+{
+name:"ООО МФК «Займер»",
+ogrn:"1235400049356",
+inn:"5406836941",
+license:"Лицензия ЦБ № 651303532004088"
+},
+{
+name:"ООО МФК «Быстроденьги»",
+ogrn:"1087325005899",
+inn:"7325005899",
+license:"Лицензия № 2110573000002"
+},
+{
+name:"ООО МКК «Срочноденьги»",
+ogrn:"1137746046943",
+inn:"7746046943",
+license:"Лицензия № 2110552000304"
+},
+{
+name:"ООО МКК «А-Деньги»",
+ogrn:"1247700171124",
+inn:"9718249135",
+license:"В реестре ЦБ под №24-030-45-010040"
+},
+{
+name:"ООО МКК «Привет, сосед»",
+ogrn:"1227700296042",
+inn:"9722021888",
+license:"В реестре ЦБ под №2203045009914"
+},
+{
+name:"ООО МКК «BelkaCredit»",
+ogrn:"1234567890123",
+inn:"1234567890",
+license:"Лицензия № 1234567890123"
+},
+{
+name:"ООО МФК «Boostra»",
+ogrn:"1234567890456",
+inn:"1234567890456",
+license:"Лицензия № 1234567890456"
+},
+{
+name:"АО «Т-Банк»",
+ogrn:"1027739642281",
+inn:"7739642281",
+license:"Лицензия № 2673"
+},
+{
+name:"ПАО «Альфа-Банк»",
+ogrn:"1027700067328",
+inn:"7700067328",
+license:"Лицензия № 1326"
+},
+{
+name:"ПАО «Банк ВТБ»",
+ogrn:"1027739609391",
+inn:"7739609391",
+license:"Лицензия № 1000"
+}
+];
+
+let filter='all';
+
+function render(){
+const list=filter==='all'?data:data.filter(x=>x.type===filter);
+
+document.getElementById('grid').innerHTML=list.map(p=>`
+<div class='card'>
+<div class='badge'>${p.label}</div>
+<div class='title'>${p.name}</div>
+<div class='row'><span>Сумма</span><span class='value'>${p.amount}</span></div>
+<div class='row'><span>Срок</span><span class='value'>${p.term}</span></div>
+<div class='row'><span>Ставка</span><span class='value'>${p.rate}</span></div>
+<div class='row'><span>Возраст</span><span class='value'>${p.age}</span></div>
+<ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+<a class='btn' href='${p.url}'>Подробнее</a>
+</div>
+`).join('');
+}
+
+function setFilter(t,btn){
+filter=t;
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+render();
+}
+
+function renderTrust(){
+document.getElementById('trust').innerHTML=trust.map(t=>`<div class='trust-item'>${t}</div>`).join('');
+}
+
+function renderCompanies(){
+    document.getElementById('company').innerHTML = companies.map(c => `
+        <div class='company-item'>
+            <strong>${c.name}</strong><br><br>
+            ОГРН: ${c.ogrn}<br>
+            ИНН: ${c.inn}<br>
+            ${c.license}
+        </div>
+    `).join('');
+}
+
+render();
+renderTrust();
+renderCompanies();
+
+</script>
+
+</body>
+</html>
