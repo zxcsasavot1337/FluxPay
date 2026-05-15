@@ -8,27 +8,33 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-font-family:Inter,Arial;
+font-family:Arial;
 color:#fff;
 background:radial-gradient(circle,#1a2a6c,#0b1020);
 min-height:100vh;
 }
 
-.container{max-width:1200px;margin:0 auto;padding:20px}
+.container{max-width:1200px;margin:auto;padding:20px}
 
 .header{
 text-align:center;
 padding:40px;
-background:rgba(255,255,255,0.05);
+background:#ffffff10;
 border-radius:20px;
 }
 
-h1{font-size:2.5rem}
+h1{font-size:42px}
 
-.filters{display:flex;gap:10px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.filters{
+display:flex;
+gap:10px;
+justify-content:center;
+flex-wrap:wrap;
+margin:20px 0;
+}
 
 .filter-btn{
-padding:10px 15px;
+padding:10px 14px;
 border-radius:999px;
 border:1px solid #fff3;
 background:#ffffff10;
@@ -36,21 +42,34 @@ color:#fff;
 cursor:pointer;
 }
 
-.filter-btn.active{background:#ffb347;color:#000;font-weight:bold}
+.filter-btn.active{
+background:#ffb347;
+color:#000;
+font-weight:bold;
+}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:15px;
+}
 
 .card{
 background:#111827cc;
 padding:15px;
-border-radius:16px;
+border-radius:14px;
 border:1px solid #ffffff10;
 }
 
+.title{font-size:18px;font-weight:bold;margin:8px 0}
 .badge{color:#ffcc33;font-size:12px}
-.title{font-size:18px;font-weight:700;margin:8px 0}
 
-.row{display:flex;justify-content:space-between;font-size:13px;color:#cbd5e1}
+.row{
+display:flex;
+justify-content:space-between;
+font-size:13px;
+color:#cbd5e1;
+}
 
 ul{font-size:12px;color:#94a3b8;margin-top:8px}
 
@@ -70,11 +89,11 @@ font-weight:bold;
 
 .company-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:10px;
 }
 
-.company-item{
+.company{
 background:#00000040;
 padding:12px;
 border-radius:12px;
@@ -112,41 +131,41 @@ font-size:12px;
 
 let filter="all";
 
-function track(name){
-let d=JSON.parse(localStorage.getItem("flux")||"{}");
-d[name]=(d[name]||0)+1;
-localStorage.setItem("flux",JSON.stringify(d));
+function track(name,url){
+let data=JSON.parse(localStorage.getItem("flux")||"{}");
+data[name]=(data[name]||0)+1;
+localStorage.setItem("flux",JSON.stringify(data));
+window.open(url,"_blank");
 }
 
 const data=[
 
-// ===== МФО (ВСЕ ВОССТАНОВЛЕНО) =====
-{name:"Займер",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
-{name:"Быстроденьги",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
-{name:"Срочно Деньги",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
-{name:"А-Деньги",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
-{name:"БелкаКредит",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
-{name:"Webbankir",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
-{name:"Умные наличные",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
-{name:"Деньги Сразу",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
-{name:"Привет, сосед",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"#"},
+// ===== МФО =====
+{name:"Займер",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/15?erid=2W5zFHwA2h6"},
+{name:"Быстроденьги",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/613?erid=LjN8JtHPe"},
+{name:"Срочно Деньги",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/38?erid=LjN8Kaxif"},
+{name:"А-Деньги",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/91?erid=2W5zFHUbgxG"},
+{name:"БелкаКредит",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/918?erid=2W5zFK43c2V"},
+{name:"Webbankir",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/241?erid=LjN8K54Q9"},
+{name:"Умные наличные",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/77?erid=LjN8JwPDS"},
+{name:"Деньги Сразу",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/11?erid=2W5zFJg738c"},
+{name:"Привет, сосед",type:"loan",label:"МФО",term:"до 30 дней",rate:"0.8%",url:"https://t.fincpanetwork.ru/click/91237/517?erid=2VtzqvQeeEG"},
 
 // ===== КРЕДИТКИ =====
-{name:"Альфа-Банк",type:"credit",label:"Кредитка",term:"100 дней",rate:"0%"},
-{name:"Т-Банк",type:"credit",label:"Кредитка",term:"55 дней",rate:"0%"},
+{name:"Альфа-Банк",type:"credit",label:"Кредитка",term:"100 дней",rate:"0%",url:"https://t.fincpanetwork.ru/click/91237/339?erid=2W5zFJjJPEG"},
+{name:"Т-Банк",type:"credit",label:"Кредитка",term:"55 дней",rate:"0%",url:"https://t.fincpanetwork.ru/click/91237/27?erid=LjN8Jw3pU"},
 
 // ===== ДЕБЕТ =====
-{name:"Альфа Дебетовая",type:"debit",label:"Дебетовая",term:"—",rate:"до 20%"},
+{name:"Альфа Дебетовая",type:"debit",label:"Дебетовая",term:"—",rate:"до 20%",url:"https://alfa.me/i_78Oe"},
 
 // ===== РКО =====
-{name:"Альфа РКО + Бизнес",type:"rko",label:"РКО",term:"онлайн",rate:"—"},
-{name:"ВТБ РКО + Бизнес",type:"rko",label:"РКО",term:"онлайн",rate:"—"}
+{name:"Альфа РКО + Бизнес",type:"rko",label:"РКО",term:"онлайн",rate:"—",url:"https://banks-market.com/offer/532/2561"},
+{name:"ВТБ РКО + Бизнес",type:"rko",label:"РКО",term:"онлайн",rate:"—",url:"https://cube-cpa.com/click/56?user_id=3209&platform_id=279&creative_id=56&erid=Kra23s7mG"}
 
 ];
 
 const companies=[
 
-// МФО
 {name:"Займер",inn:"5406836941",ogrn:"1235400049356"},
 {name:"Быстроденьги",inn:"7325005899",ogrn:"1087325005899"},
 {name:"Срочно Деньги",inn:"7746046943",ogrn:"1137746046943"},
@@ -157,7 +176,6 @@ const companies=[
 {name:"Деньги Сразу",inn:"7708808945",ogrn:"1107746605379"},
 {name:"Привет, сосед",inn:"9722021888",ogrn:"1227700296042"},
 
-// банки
 {name:"Альфа-Банк",inn:"7700067328",ogrn:"1027700067328"},
 {name:"Т-Банк",inn:"7739642281",ogrn:"1027739642281"},
 {name:"ВТБ",inn:"7739609391",ogrn:"1027739609391"}
@@ -166,7 +184,7 @@ const companies=[
 
 function render(){
 
-const list = filter==="all"?data:data.filter(x=>x.type===filter);
+const list=filter==="all"?data:data.filter(x=>x.type===filter);
 
 document.getElementById("grid").innerHTML=list.map(p=>`
 <div class="card">
@@ -182,12 +200,14 @@ document.getElementById("grid").innerHTML=list.map(p=>`
 <li>24/7 доступ</li>
 </ul>
 
-<a class="btn" href="${p.url}" onclick="track('${p.name}')">Перейти</a>
+<a class="btn" href="javascript:void(0)" onclick="track('${p.name}','${p.url}')">
+Перейти
+</a>
 </div>
 `).join("");
 
 document.getElementById("companies").innerHTML=companies.map(c=>`
-<div class="company-item">
+<div class="company">
 <b>${c.name}</b><br>
 ИНН: ${c.inn}<br>
 ОГРН: ${c.ogrn}
